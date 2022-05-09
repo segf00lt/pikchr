@@ -2,6 +2,8 @@ CC = gcc
 CFLAGS = -O0 -g -Wall -Wextra
 LIBS = -lm
 
+INSTALL_PATH = /usr/local/bin
+
 TCL_PACKAGE_NAME    = pikchr
 TCL_PACKAGE_VERSION = 1.0
 TCL_PACKAGE_FLAGS = \
@@ -36,6 +38,11 @@ piktcl: pikchr.c
 
 lemon:	lemon.c
 	$(CC) $(CFLAGS) lemon.c -o lemon
+
+install: all
+	mkdir -p $(INSTALL_PATH)
+	cp -f pikchr $(INSTALL_PATH)/pikchr
+	chmod 755 $(INSTALL_PATH)/pikchr
 
 test:	pikchr
 	./pikchr */*.pikchr >out.html || true
